@@ -1,0 +1,44 @@
+{{define "navbar"}}
+
+<header>
+    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light fixed-top justify-content-between"
+        style="background-color: #e5e4e3;">
+        <div class="container-fluid">
+            <!--<button class="navbar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
+                <i class="fas fa-bars"></i>
+            </button>-->
+            <a class="navbar-brand" href="/">
+                <i class="fa-solid fa-plane fa-fw me-3" style="transform: rotate(-20deg);"></i><span>سفراتور</span>
+            </a>
+
+            <ul class="navbar-nav d-flex flex-row">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#"
+                        id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="assets/img/blank-avatar.png" class="rounded-circle" height="27" alt="Avatar"
+                            loading="lazy" />
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                        {{if not .user}}
+                        <li>
+                            <a class="dropdown-item" href="/signup">ثبت نام</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/login">ورود</a>
+                        </li>
+                        {{end}}
+                        {{if .user}}
+                        <li>
+                            <a class="dropdown-item" href="#">پروفایل</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/logout">خروج</a>
+                        </li>
+                        {{end}}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+{{end}}

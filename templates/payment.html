@@ -1,0 +1,81 @@
+{{ template "header" .}}
+{{ template "sidebar" .}}
+
+<main style="margin-top: 70px;">
+    <div class="container">
+        <div class="fs-4">
+            خرید بلیط
+        </div>
+        <div class="col-md-11">
+            <hr class="form-line">
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <form method="POST" action="#" class="me-3">
+                    <div class="row" style="margin-top: 7px;">
+                        <div class="form-group col-md-5">
+                            <input type="text" class="form-control" placeholder="نام لاتین" for="latin_name">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <input type="text" class="form-control" placeholder="نام خانوادگی لاتین" for="latin_name">
+                        </div>
+                    </div>
+                    <div class="row " style="margin-top: 7px;">
+                        <div class="form-group col-md-5">
+                            <input type="text" class="form-control" placeholder="نام فارسی">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <input type="text" class="form-control" placeholder="نام خانوادگی فارسی">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 7px;">
+                        <div class="form-group col-md-5">
+                            <select class="form-control" id="city2" class="selectpicker">
+                                <option value="جنسیت" class="place" selected disabled hidden> جنسیت</option>
+                                <option value="1"> آقا . Mr</option>
+                                <option value="2">خانم . Mrs</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 7px;">
+                        <div class="form-group col-md-5">
+                            <input type="text" class="form-control" placeholder="کد ملی">
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <hr class="form-line">
+                    </div>
+                    <div class="row" style="margin-top: 7px;">
+                        <div class="col col-md-1">
+                            <button type="submit" class="btn btn-primary" style=" height: 40px;; width: 222px;">افزودن مسافر</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="col-6">
+                <div class="card shadow-lg p-3 mb-5 bg-body rounded" style="width: 18rem;">
+                    <img src="assets/img/airplane.png" class="card-img-top" alt="testing">
+                    <div class="card-body">
+                        <h5 class="card-title">جزئیات سفر</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">An item</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+{{ template "footer"}}

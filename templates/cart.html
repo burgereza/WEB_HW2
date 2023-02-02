@@ -1,0 +1,62 @@
+{{ template "header" .}}
+{{ template "sidebar" .}}
+
+<main style="margin-top: 70px;">
+    <div class="container">
+        <div class="fs-4" style="margin-bottom: 20px;">
+            سبد خرید
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <table>
+                    <tr>
+                      <th>نام</th>
+                      <th>نام خانوادگی</th>
+                      <th>کد ملی</th>
+                    </tr>
+                    <tr>
+                      <td>شهاب</td>
+                      <td>حسینی</td>
+                      <td>۰۲۱۳۴۶۵۷</td>
+                    </tr>
+                    <tr>
+                      <td>اصغر</td>
+                      <td>فرهادی</td>
+                      <td>۳۱۴۳۵۶۵۹</td>
+                    </tr>
+                    <tr>
+                      <td>پیمان</td>
+                      <td>معادی</td>
+                      <td>۰۰۳۱۴۳۶۸</td>
+                    </tr>
+                </table>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col col-md-1">
+                        <button type="submit" class="btn btn-primary" style=" height: 40px;; width: 250px;">تایید و انتقال به درگاه پرداخت</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card" style="width: 18rem;">
+                    <img src="assets/img/airplane.png" class="card-img-top" alt="testing">
+                    <div class="card-body">
+                        <h5 class="card-title">جزئیات سفر</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">An item</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{{ template "footer"}}
