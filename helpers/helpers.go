@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	models "webapp/models"
+	//db "webapp/database"
 )
 
 var userpass = make(map[string]models.User)
@@ -27,6 +28,7 @@ func CheckUserPass(username, password string) bool {
 	CreateUser("hello", "itsme", "09120000000") //test case
 	CreateUser("john", "doe", "09120000000")
 	// userpass["john"] = "doe"
+	//db.insertUser(username , password , "0912")
 
 	log.Println("checkUserPass", username, password, userpass)
 
