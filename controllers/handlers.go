@@ -1,11 +1,11 @@
 package controllers
 
 import (
-	"github.com/gin-contrib/sessions"
-	"github.com/gin-gonic/gin"
-
 	"log"
 	"net/http"
+
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-gonic/gin"
 
 	database "webapp/database"
 	globals "webapp/globals"
@@ -65,21 +65,6 @@ func SignupPostHandler() gin.HandlerFunc {
 		password2 := c.PostForm("password2")
 		phoneNumber := c.PostForm("phone_number")
 
-		database.InsertUser(username, password, phoneNumber)
-
-		// psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", "localhost", 5432, "postgres", "404303202101", "HW2")
-		// db, err := sql.Open("postgres", psqlInfo)
-
-		// if err != nil {
-		// 	panic(err)
-		// }
-
-		// _, err = db.Exec("INSERT INTO users(username, password ,phonenumber) VALUES($1,$2,$3)", username, password, phoneNumber)
-
-		// if err != nil {
-		// 	panic(err)
-		// }
-
 		if helpers.EmptyUserPass(username, password) {
 			c.HTML(http.StatusBadRequest, "signup.html", gin.H{"content": "فیلد ها نباید خالی باشند"})
 			return
@@ -100,6 +85,13 @@ func SignupPostHandler() gin.HandlerFunc {
 			c.HTML(http.StatusInternalServerError, "signup.html", gin.H{"content": "Failed to save session"})
 			return
 		}
+
+		if err := database.CheckUsernameAvailability(username); !err {
+			c.HTML(http.StatusInternalServerError, "signup.html", gin.H{"content": "این شماره همراه قبلا استفاده شده است!"})
+			return
+		}
+
+		database.InsertUser(username, password, phoneNumber)
 
 		c.Redirect(http.StatusFound, "/")
 	}
