@@ -23,7 +23,6 @@ func InsertUser(username string, password string, phoneNumber string) {
 	if err != nil {
 		panic(err)
 	}
-
 }
 
 // see if password is correct
@@ -77,20 +76,19 @@ func GetCities() []string {
 }
 
 // for unique username
-func CheckUsernameAvailability(username string) bool {
+func CheckPhoneNumber(phoneNumber string) bool {
 	// var db *sql.DB
 	// db = DB_conn()
 
 	db, err := sql.Open("postgres", psqlInfo)
 	var x string
-	err = db.QueryRow("SELECT username FROM users WHERE username=$1", username).Scan(&x)
+	err = db.QueryRow("SELECT phonenumber FROM users WHERE phonenumber=$1", phoneNumber).Scan(&x)
 
 	if err != nil {
 		return true
 	}
 
 	return false
-
 }
 
 // for unique email
@@ -108,7 +106,6 @@ func CheckEmailAvailability(username string) bool {
 	}
 
 	return false
-
 }
 
 func DB_conn() (db *sql.DB) {

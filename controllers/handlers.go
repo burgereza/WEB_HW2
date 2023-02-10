@@ -86,7 +86,7 @@ func SignupPostHandler() gin.HandlerFunc {
 			return
 		}
 
-		if err := database.CheckUsernameAvailability(username); !err {
+		if err := database.CheckPhoneNumber(phoneNumber); !err {
 			c.HTML(http.StatusInternalServerError, "signup.html", gin.H{"content": "این شماره همراه قبلا استفاده شده است!"})
 			return
 		}
