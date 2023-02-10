@@ -12,13 +12,13 @@ var err error
 var psqlInfo string = fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", "localhost", 5432, "postgres", "404303202101", "HW2")
 
 // create new user in database
-func InsertUser(username string, password string, phoneNumber string) {
+func InsertUser(firstname, lastname, password, phoneNumber string) {
 	// var db *sql.DB
 	// db = DB_conn()
 
 	db, err := sql.Open("postgres", psqlInfo)
 
-	_, err = db.Exec("INSERT INTO users(username, password ,phonenumber) VALUES($1,$2,$3)", username, password, phoneNumber)
+	_, err = db.Exec("INSERT INTO users(firstname ,lastname , password ,phonenumber) VALUES($1,$2,$3,$4)", firstname, lastname, password, phoneNumber)
 
 	if err != nil {
 		panic(err)

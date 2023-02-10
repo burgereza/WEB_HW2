@@ -88,7 +88,7 @@ func SignupPostHandler() gin.HandlerFunc {
 			return
 		}
 
-		database.InsertUser(username, password, phoneNumber)
+		database.InsertUser(firstname, lastname, password, phoneNumber)
 
 		c.Redirect(http.StatusFound, "/")
 	}
