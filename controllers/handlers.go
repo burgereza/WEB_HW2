@@ -3,12 +3,18 @@ package controllers
 import (
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+
 	"log"
 	"net/http"
 
+	database "webapp/database"
 	globals "webapp/globals"
 	helpers "webapp/helpers"
+
+	_ "github.com/lib/pq"
 )
+
+//var db *sql.DB
 
 func IndexGetHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -16,10 +22,10 @@ func IndexGetHandler() gin.HandlerFunc {
 		user := session.Get(globals.Userkey)
 		log.Println("user is:", user)
 		c.HTML(http.StatusOK, "index.html", gin.H{
-			"title": "Safarator - Index",
+			"title":   "Safarator - Index",
 			"sidebar": 1,
 			"content": "",
-			"user": user,
+			"user":    user,
 		})
 	}
 }
@@ -31,16 +37,16 @@ func SignupGetHandler() gin.HandlerFunc {
 		if user != nil {
 			c.HTML(http.StatusBadRequest, "signup.html",
 				gin.H{
-					"title": "Safarator - Signup",
+					"title":   "Safarator - Signup",
 					"content": "Please logout first",
-					"user": user,
+					"user":    user,
 				})
 			return
 		}
 		c.HTML(http.StatusOK, "signup.html", gin.H{
-			"title": "Safarator - Signup",
+			"title":   "Safarator - Signup",
 			"content": "",
-			"user": user,
+			"user":    user,
 		})
 	}
 }
@@ -53,11 +59,26 @@ func SignupPostHandler() gin.HandlerFunc {
 			c.HTML(http.StatusBadRequest, "signup.html", gin.H{"content": "Please logout first"})
 			return
 		}
-		
+
 		username := c.PostForm("username")
 		password := c.PostForm("password")
 		password2 := c.PostForm("password2")
 		phoneNumber := c.PostForm("phone_number")
+
+		database.InsertUser(username, password, phoneNumber)
+
+		// psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", "localhost", 5432, "postgres", "404303202101", "HW2")
+		// db, err := sql.Open("postgres", psqlInfo)
+
+		// if err != nil {
+		// 	panic(err)
+		// }
+
+		// _, err = db.Exec("INSERT INTO users(username, password ,phonenumber) VALUES($1,$2,$3)", username, password, phoneNumber)
+
+		// if err != nil {
+		// 	panic(err)
+		// }
 
 		if helpers.EmptyUserPass(username, password) {
 			c.HTML(http.StatusBadRequest, "signup.html", gin.H{"content": "فیلد ها نباید خالی باشند"})
@@ -91,16 +112,16 @@ func LoginGetHandler() gin.HandlerFunc {
 		if user != nil {
 			c.HTML(http.StatusBadRequest, "login.html",
 				gin.H{
-					"title": "Safarator - Login",
+					"title":   "Safarator - Login",
 					"content": "Please logout first",
-					"user": user,
+					"user":    user,
 				})
 			return
 		}
 		c.HTML(http.StatusOK, "login.html", gin.H{
-			"title": "Safarator - Login",
+			"title":   "Safarator - Login",
 			"content": "",
-			"user": user,
+			"user":    user,
 		})
 	}
 }
@@ -162,10 +183,10 @@ func CartGetHandler() gin.HandlerFunc {
 		session := sessions.Default(c)
 		user := session.Get(globals.Userkey)
 		c.HTML(http.StatusOK, "cart.html", gin.H{
-			"title": "Safarator - Cart",
+			"title":   "Safarator - Cart",
 			"sidebar": 2,
 			"content": "",
-			"user": user,
+			"user":    user,
 		})
 	}
 }
@@ -175,9 +196,9 @@ func PaymentGetHadler() gin.HandlerFunc {
 		session := sessions.Default(c)
 		user := session.Get(globals.Userkey)
 		c.HTML(http.StatusOK, "payment.html", gin.H{
-			"title": "Safarator - Payment",
+			"title":   "Safarator - Payment",
 			"content": "",
-			"user": user,
+			"user":    user,
 		})
 	}
 }

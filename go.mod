@@ -2,6 +2,8 @@ module webapp
 
 go 1.19
 
+require github.com/lib/pq v1.10.7
+
 require (
 	github.com/gin-contrib/sessions v0.0.5 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
