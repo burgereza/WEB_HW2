@@ -61,11 +61,13 @@ func SignupPostHandler() gin.HandlerFunc {
 		}
 
 		username := c.PostForm("username")
+		firstname := c.PostForm("firstname")
+		lastname := c.PostForm("lastname")
 		password := c.PostForm("password")
 		password2 := c.PostForm("password2")
 		phoneNumber := c.PostForm("phone_number")
 
-		if helpers.EmptyUserPass(username, password) {
+		if helpers.Emptyfields(firstname, lastname, password, phoneNumber) {
 			c.HTML(http.StatusBadRequest, "signup.html", gin.H{"content": "فیلد ها نباید خالی باشند"})
 			return
 		}
@@ -75,19 +77,14 @@ func SignupPostHandler() gin.HandlerFunc {
 			return
 		}
 
-		if err := helpers.CreateUser(username, password, phoneNumber); !err {
-			c.HTML(http.StatusInternalServerError, "signup.html", gin.H{"content": "نمی توان با این مشخصات ثبت نام کرد"})
+		if err := database.CheckPhoneNumber(phoneNumber); !err {
+			c.HTML(http.StatusInternalServerError, "signup.html", gin.H{"content": "این شماره همراه قبلا استفاده شده است!"})
 			return
 		}
 
 		session.Set(globals.Userkey, username)
 		if err := session.Save(); err != nil {
 			c.HTML(http.StatusInternalServerError, "signup.html", gin.H{"content": "Failed to save session"})
-			return
-		}
-
-		if err := database.CheckPhoneNumber(phoneNumber); !err {
-			c.HTML(http.StatusInternalServerError, "signup.html", gin.H{"content": "این شماره همراه قبلا استفاده شده است!"})
 			return
 		}
 
@@ -127,20 +124,20 @@ func LoginPostHandler() gin.HandlerFunc {
 			return
 		}
 
-		username := c.PostForm("username")
+		phoneNumber := c.PostForm("phone_number")
 		password := c.PostForm("password")
 
-		if helpers.EmptyUserPass(username, password) {
-			c.HTML(http.StatusBadRequest, "login.html", gin.H{"content": "Parameters can't be empty"})
+		if helpers.EmptyUserPass(phoneNumber, password) {
+			c.HTML(http.StatusBadRequest, "login.html", gin.H{"content": "فیلد ها نباید خالی باشند"})
 			return
 		}
 
-		if !helpers.CheckUserPass(username, password) {
-			c.HTML(http.StatusUnauthorized, "login.html", gin.H{"content": "Incorrect username or password"})
+		if !database.CheckUserInfo(phoneNumber, password) {
+			c.HTML(http.StatusUnauthorized, "login.html", gin.H{"content": "شماره موبایل یا رمز عبور اشتباه است!"})
 			return
 		}
 
-		session.Set(globals.Userkey, username)
+		session.Set(globals.Userkey, phoneNumber)
 		if err := session.Save(); err != nil {
 			c.HTML(http.StatusInternalServerError, "login.html", gin.H{"content": "Failed to save session"})
 			return

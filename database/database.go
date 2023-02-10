@@ -26,15 +26,15 @@ func InsertUser(username string, password string, phoneNumber string) {
 }
 
 // see if password is correct
-func CheckUserInfo(username string, password string) bool {
+func CheckUserInfo(phonenumber string, password string) bool {
 	// var db *sql.DB
 	// db = DB_conn()
 
 	db, err := sql.Open("postgres", psqlInfo)
 
 	var db_pass string
-	// err := db.QueryRow("SELECT password FROM users WHERE username=?", username).Scan(&db_pass)
-	err = db.QueryRow("SELECT password FROM users WHERE username=?", username).Scan(&db_pass)
+	// err := db.QueryRow("SELECT password FROM users WHERE phonenumber=?", phonenumber).Scan(&db_pass)
+	err = db.QueryRow("SELECT password FROM users WHERE phonenumber=$1", phonenumber).Scan(&db_pass)
 
 	if err != nil {
 		return false
@@ -99,7 +99,7 @@ func CheckEmailAvailability(username string) bool {
 	db, err := sql.Open("postgres", psqlInfo)
 
 	var x string
-	err = db.QueryRow("SELECT email FROM users WHERE username=?", username).Scan(&x)
+	err = db.QueryRow("SELECT email FROM users WHERE username=$1", username).Scan(&x)
 
 	if err != nil {
 		return true

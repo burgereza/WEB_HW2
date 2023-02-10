@@ -44,6 +44,14 @@ func CheckUserPass(username, password string) bool {
 	}
 }
 
-func EmptyUserPass(username, password string) bool {
-	return strings.Trim(username, " ") == "" || strings.Trim(password, " ") == ""
+func Emptyfields(firstname, lastname, password, phoneNumber string) bool {
+	return strings.Trim(firstname, " ") == "" ||
+		strings.Trim(lastname, " ") == "" ||
+		strings.Trim(password, " ") == "" ||
+		strings.Trim(phoneNumber, " ") == ""
+}
+
+func EmptyUserPass(phoneNumber, password string) bool {
+	return strings.Trim(password, " ") == "" ||
+		strings.Trim(phoneNumber, " ") == ""
 }
