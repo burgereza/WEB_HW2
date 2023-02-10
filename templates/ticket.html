@@ -1,0 +1,50 @@
+{{ template "header" .}}
+{{ template "sidebar" .}}
+
+<main style="margin-top: 70px;">
+    <div class="container">
+        <div class="fs-4">
+            خرید بلیط
+            {{if .content}}
+            <div class="notification is-danger is-light">
+              {{.content}}
+            </div>
+            {{end}}
+        </div>
+        <div class="col-md-11">
+            <hr class="form-line">
+        </div>
+        <form action="#" class="me-3">
+            <div class="row" style="margin-top: 7px;">
+                <div class="form-group col-md-4">
+                    <label for="p-datepicker">تاریخ</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control p-datepicker" id="p-datepicker">
+                        <span class="input-group-text bg-white"><i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col col-md-1">
+                    <button class="btn btn-primary" id="submit" onclick="">روز قبل</button>
+                </div>
+                <div class="col col-md-1">
+                    <button class="btn btn-primary" id="submit" onclick="">روز بعد</button>
+                </div>
+                <div class="form-group col-md-2">
+
+                </div>
+            </div>
+        </form>
+        <div id="std"></div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        مشخصات تیم:
+        حسین صبحی ۹۷۱۰۶۰۸۱
+        دانیال براری ۹۷۱۱۰۵۶۳
+        رضا قمقام ۹۹۱۷۰۵۴۲
+    </div>
+</footer>
+{{ template "footer"}}
