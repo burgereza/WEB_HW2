@@ -14,7 +14,7 @@ func PublicRoutes(g *gin.RouterGroup) {
 	g.GET("/signup", controllers.SignupGetHandler())
 	g.POST("/signup", controllers.SignupPostHandler())
 	g.GET("/cart", controllers.CartGetHandler())
-	g.GET("/payment", controllers.PaymentGetHadler())
+	g.GET("/payment", controllers.PaymentGetHandler())
 
 }
 
@@ -22,6 +22,5 @@ func PrivateRoutes(g *gin.RouterGroup) {
 
 	g.GET("/logout", controllers.LogoutGetHandler())
 	// g.GET("/dashboard", controllers.DashboardGetHandler())
-	
 
 }

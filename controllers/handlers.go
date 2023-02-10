@@ -27,6 +27,15 @@ func IndexGetHandler() gin.HandlerFunc {
 			"content": "",
 			"user":    user,
 		})
+
+		// departure := c.PostForm("departure")
+		// arrival := c.PostForm("arrival")
+
+		// if helpers.Emptyfields2(departure, arrival) {
+		// 	c.HTML(http.StatusBadRequest, "index.html", gin.H{"content": "لطفا مبدا و مقصد را مشخص کنید"})
+		// 	return
+		// }
+
 	}
 }
 
@@ -180,7 +189,7 @@ func CartGetHandler() gin.HandlerFunc {
 	}
 }
 
-func PaymentGetHadler() gin.HandlerFunc {
+func PaymentGetHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		session := sessions.Default(c)
 		user := session.Get(globals.Userkey)

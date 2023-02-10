@@ -51,6 +51,11 @@ func Emptyfields(firstname, lastname, password, phoneNumber string) bool {
 		strings.Trim(phoneNumber, " ") == ""
 }
 
+func Emptyfields2(firstname, lastname string) bool {
+	return strings.Trim(firstname, " ") == "" ||
+		strings.Trim(lastname, " ") == ""
+}
+
 func EmptyUserPass(phoneNumber, password string) bool {
 	return strings.Trim(password, " ") == "" ||
 		strings.Trim(phoneNumber, " ") == ""
