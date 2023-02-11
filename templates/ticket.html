@@ -10,11 +10,15 @@
               {{.content}}
             </div>
             {{end}}
+            {{ .city1 }}
+            {{ .city2 }}
+            {{ .date }}
+            {{ .passenger_number }}
         </div>
         <div class="col-md-11">
             <hr class="form-line">
         </div>
-        <form action="#" class="me-3">
+        <form method="POST" action="#" class="me-3">
             <div class="row" style="margin-top: 7px;">
                 <div class="form-group col-md-4">
                     <label for="p-datepicker">تاریخ</label>
@@ -38,13 +42,4 @@
         <div id="std"></div>
     </div>
 </main>
-
-<footer>
-    <div class="container">
-        مشخصات تیم:
-        حسین صبحی ۹۷۱۰۶۰۸۱
-        دانیال براری ۹۷۱۱۰۵۶۳
-        رضا قمقام ۹۹۱۷۰۵۴۲
-    </div>
-</footer>
 {{ template "footer"}}

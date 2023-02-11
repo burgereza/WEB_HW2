@@ -20,11 +20,14 @@ func IndexGetHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		session := sessions.Default(c)
 		user := session.Get(globals.Userkey)
-		log.Println("user is:", user)
+		// log.Println("user is:", user)
+		cities := database.GetCities()
+		// log.Println("cities are:", cities[1:])
 		c.HTML(http.StatusOK, "index.html", gin.H{
 			"title":   "Safarator - Index",
 			"sidebar": 1,
 			"content": "",
+			"cities":  cities[1:],
 			"user":    user,
 		})
 
@@ -36,6 +39,53 @@ func IndexGetHandler() gin.HandlerFunc {
 		// 	return
 		// }
 
+	}
+}
+
+func IndexPostHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		session := sessions.Default(c)
+		user := session.Get(globals.Userkey)
+		// log.Println("user is:", user)
+
+		city1 := c.PostForm("city1")
+		city2 := c.PostForm("city2")
+		date := c.PostForm("datepicker")
+		passenger_num := c.PostForm("passenger_number")
+
+		log.Println("city:", city1, city2)
+		log.Println("date:", date)
+		log.Println("passenger_number:", passenger_num)
+
+		c.HTML(http.StatusOK, "ticket.html", gin.H{
+			"title":            "Safarator - Ticket",
+			"sidebar":          1,
+			"content":          "",
+			"city1":            city1,
+			"city2":            city2,
+			"date":             date,
+			"passenger_number": passenger_num,
+			"user":             user,
+		})
+	}
+}
+
+func TicketGetHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		session := sessions.Default(c)
+		user := session.Get(globals.Userkey)
+		// log.Println("user is:", user)
+
+		// city1 := c.PostForm("city1")
+		// tickets := database.GetTickets(city1, city2, )
+
+		c.HTML(http.StatusOK, "ticket.html", gin.H{
+			"title":   "Safarator - Ticket",
+			"sidebar": 1,
+			"content": "",
+			// "tickets": tickets,
+			"user": user,
+		})
 	}
 }
 

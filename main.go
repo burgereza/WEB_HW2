@@ -1,13 +1,14 @@
-
 package main
 
 import (
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
+
 	//"html/template"
 	//"strings"
 
+	//database "webapp/database"
 	globals "webapp/globals"
 	middleware "webapp/middleware"
 	routes "webapp/routes"
@@ -27,6 +28,6 @@ func main() {
 	private := router.Group("/")
 	private.Use(middleware.AuthRequired)
 	routes.PrivateRoutes(private)
-
+	//database.DB_conn()
 	router.Run("localhost:8080")
 }

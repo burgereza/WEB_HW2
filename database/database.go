@@ -23,6 +23,7 @@ func InsertUser(firstname, lastname, password, phoneNumber string) {
 	if err != nil {
 		panic(err)
 	}
+	db.Close()
 }
 
 // see if password is correct
@@ -43,7 +44,7 @@ func CheckUserInfo(phonenumber string, password string) bool {
 	if db_pass != password {
 		return false
 	}
-
+	db.Close()
 	return true
 }
 
@@ -53,9 +54,10 @@ func GetCities() []string {
 
 	db, err := sql.Open("postgres", psqlInfo)
 
-	s := make([]string, 3)
+	// s := make([]string, 3)
+	var s []string
 
-	rows, err := db.Query("SELECT city_name FROM city WHERE country_name=iran")
+	rows, err := db.Query("SELECT city_name FROM airport")
 
 	if err != nil {
 		panic(err)
@@ -71,7 +73,7 @@ func GetCities() []string {
 		}
 		s = append(s, city_name)
 	}
-
+	db.Close()
 	return s
 }
 
@@ -87,7 +89,7 @@ func CheckPhoneNumber(phoneNumber string) bool {
 	if err != nil {
 		return true
 	}
-
+	db.Close()
 	return false
 }
 
@@ -104,13 +106,13 @@ func CheckEmailAvailability(username string) bool {
 	if err != nil {
 		return true
 	}
-
+	db.Close()
 	return false
 }
 
-func DB_conn() (db *sql.DB) {
+func DB_conn() {
 
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", "localhost", 5432, "postgres", "404303202101", "HW2")
+	//psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", "localhost", 5432, "postgres", "404303202101", "HW2")
 	db, err := sql.Open("postgres", psqlInfo)
 
 	if err != nil {
@@ -119,5 +121,5 @@ func DB_conn() (db *sql.DB) {
 
 	defer db.Close()
 
-	return db
+	//return db
 }

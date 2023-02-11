@@ -9,10 +9,12 @@ import (
 func PublicRoutes(g *gin.RouterGroup) {
 
 	g.GET("/", controllers.IndexGetHandler())
+	g.POST("/", controllers.IndexPostHandler())
 	g.GET("/login", controllers.LoginGetHandler())
 	g.POST("/login", controllers.LoginPostHandler())
 	g.GET("/signup", controllers.SignupGetHandler())
 	g.POST("/signup", controllers.SignupPostHandler())
+	g.GET("/ticket", controllers.TicketGetHandler())
 	g.GET("/cart", controllers.CartGetHandler())
 	g.GET("/payment", controllers.PaymentGetHandler())
 
