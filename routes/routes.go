@@ -15,6 +15,7 @@ func PublicRoutes(g *gin.RouterGroup) {
 	g.GET("/signup", controllers.SignupGetHandler())
 	g.POST("/signup", controllers.SignupPostHandler())
 	g.GET("/ticket", controllers.TicketGetHandler())
+	//g.POST("/ticket", controllers.TicketPostHandler())
 	g.GET("/cart", controllers.CartGetHandler())
 	g.GET("/payment", controllers.PaymentGetHandler())
 

@@ -4,30 +4,26 @@
 <main style="margin-top: 70px;">
     <div class="container">
         <div class="fs-4">
-            خرید بلیط
             {{if .content}}
             <div class="notification is-danger is-light">
               {{.content}}
             </div>
             {{end}}
-            {{ .city1 }}
-            {{ .city2 }}
+            <!-- {{ .city1 }}
+            {{ .city2 }} -->
             {{ .date }}
-            {{ .passenger_number }}
-        </div>
-        <div class="col-md-11">
-            <hr class="form-line">
+            <!-- {{ .passenger_number }} -->
         </div>
         <form method="POST" action="#" class="me-3">
             <div class="row" style="margin-top: 7px;">
-                <div class="form-group col-md-4">
+                <!-- <div class="form-group col-md-4">
                     <label for="p-datepicker">تاریخ</label>
                     <div class="input-group">
                         <input type="text" class="form-control p-datepicker" id="p-datepicker">
                         <span class="input-group-text bg-white"><i class="fa fa-calendar"></i>
                         </span>
                     </div>
-                </div>
+                </div> -->
                 <div class="col col-md-1">
                     <button class="btn btn-primary" id="submit" onclick="">روز قبل</button>
                 </div>
@@ -39,6 +35,15 @@
                 </div>
             </div>
         </form>
+        <div class="col-md-11">
+            <hr class="form-line">
+        </div>
+        {{ range $ticket := .tickets }}
+            <div style="padding: 10px;">
+                <a href="">{{$ticket}}</a>
+                <button class="btn btn-primary" id="submit" onclick="">خرید بلیط</button>
+            </div>
+        {{ end }}
         <div id="std"></div>
     </div>
 </main>

@@ -52,10 +52,12 @@ func IndexPostHandler() gin.HandlerFunc {
 		city2 := c.PostForm("city2")
 		date := c.PostForm("datepicker")
 		passenger_num := c.PostForm("passenger_number")
+		tickets := database.GetTickets(city1, city2, date)
 
 		log.Println("city:", city1, city2)
 		log.Println("date:", date)
 		log.Println("passenger_number:", passenger_num)
+		log.Println(tickets)
 
 		c.HTML(http.StatusOK, "ticket.html", gin.H{
 			"title":            "Safarator - Ticket",
@@ -63,6 +65,7 @@ func IndexPostHandler() gin.HandlerFunc {
 			"content":          "",
 			"city1":            city1,
 			"city2":            city2,
+			"tickets":          tickets,
 			"date":             date,
 			"passenger_number": passenger_num,
 			"user":             user,
@@ -77,17 +80,47 @@ func TicketGetHandler() gin.HandlerFunc {
 		// log.Println("user is:", user)
 
 		// city1 := c.PostForm("city1")
-		// tickets := database.GetTickets(city1, city2, )
+		// city2 := c.PostForm("city2")
+		// log.Println("sssssssssssssssssssssssssssssss")
+		// tickets := database.GetTickets(city1, city2)
 
 		c.HTML(http.StatusOK, "ticket.html", gin.H{
 			"title":   "Safarator - Ticket",
 			"sidebar": 1,
 			"content": "",
-			// "tickets": tickets,
+			//"tickets": tickets,
 			"user": user,
 		})
 	}
 }
+
+// func TicketPostHandler() gin.HandlerFunc {
+// 	return func(c *gin.Context) {
+// 		session := sessions.Default(c)
+// 		user := session.Get(globals.Userkey)
+// 		// log.Println("user is:", user)
+
+// 		city1 := c.PostForm("city1")
+// 		city2 := c.PostForm("city2")
+// 		date := c.PostForm("datepicker")
+// 		passenger_num := c.PostForm("passenger_number")
+
+// 		log.Println("city:", city1, city2)
+// 		log.Println("date:", date)
+// 		log.Println("passenger_number:", passenger_num)
+
+// 		c.HTML(http.StatusOK, "ticket.html", gin.H{
+// 			"title":            "Safarator - Ticket",
+// 			"sidebar":          1,
+// 			"content":          "",
+// 			"city1":            city1,
+// 			"city2":            city2,
+// 			"date":             date,
+// 			"passenger_number": passenger_num,
+// 			"user":             user,
+// 		})
+// 	}
+// }
 
 func SignupGetHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
