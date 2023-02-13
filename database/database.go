@@ -14,8 +14,6 @@ var err error
 var psqlInfo string = fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", "localhost", 5432, "postgres", "404303202101", "HW2")
 
 func InsertUser(firstname, lastname, password, phoneNumber string) {
-	// var db *sql.DB
-	// db = DB_conn()
 	db, err := sql.Open("postgres", psqlInfo)
 	_, err = db.Exec("INSERT INTO users(firstname ,lastname , password ,phonenumber) VALUES($1,$2,$3,$4)", firstname, lastname, password, phoneNumber)
 
@@ -26,8 +24,6 @@ func InsertUser(firstname, lastname, password, phoneNumber string) {
 }
 
 func CheckUserInfo(phonenumber string, password string) bool {
-	// var db *sql.DB
-	// db = DB_conn()
 	db, err := sql.Open("postgres", psqlInfo)
 	var db_pass string
 	// err := db.QueryRow("SELECT password FROM users WHERE phonenumber=?", phonenumber).Scan(&db_pass)
@@ -43,8 +39,6 @@ func CheckUserInfo(phonenumber string, password string) bool {
 }
 
 func GetCities() []string {
-	// var db *sql.DB
-	// db = DB_conn()
 	db, err := sql.Open("postgres", psqlInfo)
 	// s := make([]string, 3)
 	var s []string
@@ -88,6 +82,7 @@ func GetTickets(city1, city2, date string) []models.Ticket {
 
 	rows, err := db.Query("SELECT flight_serial ,flight_id ,aircraft ,departure_utc ,duration ,y_price FROM flight WHERE origin=$1 AND destination=$2", origin_iata_code, dest_iata_code)
 	//rows, err := db.Query("SELECT flight_serial ,flight_id ,aircraft ,departure_utc ,duration ,y_price FROM flight WHERE origin=$1", origin)
+	//rows, err := db.Query("SELECT flight_serial ,flight_id ,aircraft ,departure_utc ,duration ,y_price FROM flight WHERE origin=$1 AND destination=$2", "TUA", "TZL")
 	if err != nil {
 		panic(err)
 	}
@@ -114,8 +109,11 @@ func GetTickets(city1, city2, date string) []models.Ticket {
 		t.Dest = city2
 		t.Aircraft = aircraft
 		t.Departure_utc = departure_utc
-		t.Duration = duration
+		t.Duration = duration[:5]
 		log.Println("departure_utc : ", departure_utc[:10])
+
+		//dateNewFormat := date[:4] + "-" + date[5:7] + "-" + date[9:10]
+		//log.Println("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq========== ", departure_utc[:10])
 		if departure_utc[:10] == date {
 			s = append(s, t)
 		}
@@ -126,8 +124,6 @@ func GetTickets(city1, city2, date string) []models.Ticket {
 }
 
 func CheckPhoneNumber(phoneNumber string) bool {
-	// var db *sql.DB
-	// db = DB_conn()
 	db, err := sql.Open("postgres", psqlInfo)
 	var x string
 	err = db.QueryRow("SELECT phonenumber FROM users WHERE phonenumber=$1", phoneNumber).Scan(&x)
